@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,500;1,9..40,200;1,9..40,300;1,9..40,600&family=Lalezar&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <div class="center" style="display: none;">
+        <h1 style="margin-top: 1em;"><span>Player Name</span></h1>
+        <span style="color: #312E33; ">has now their turn</span>
+        
+        <div class="grid-container">
+            <div class="grid-item"><span></span></div>
+            <div class="grid-item"><span></span></div>
+            <div class="grid-item"><span></span></div>
+            <div class="grid-item"><span></span></div>
+            <div class="grid-item"><span>X</span></div>
+            <div class="grid-item"><span></span></div>
+            <div class="grid-item"><span></span></div>
+            <div class="grid-item"><span></span></div>
+            <div class="grid-item"><span></span></div>
+        </div>
+    </div>
+
+
+    <div class="center" >
+      <div class="center start-menu">
+        <div class="player-container">
+          <input type="text" class="player-name" placeholder="Player 1">
+          <!-- Develop a controller function that changes the state / content of the button form one to the other -->
+          <button class="signs">X</button> 
+        </div>
+        <div class="player-container">
+          <input type="text" class="player-name" placeholder="Player 2">
+          <button class="signs">O</button>
+        </div>
+        <button class="button-start">Start</button>
+      </div>
+    </div>
+
+
+    <div class="center" style="display: none; ">
+      <div class="center winner-screen start-menu">
+        <h1>CONGRATULATIONS!</h1>
+        <h2>Player Name</h2>
+        <button></button>
+      </div>
+    </div>
+
+
+    <script src="index.js"></script>
+  </body>
+</html>
