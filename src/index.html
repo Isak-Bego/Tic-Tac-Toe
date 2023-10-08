@@ -14,25 +14,25 @@
   </head>
   <body>
 
-    <div class="center" style="display: none;">
-        <h1 style="margin-top: 1em;"><span>Player Name</span></h1>
+    <div class="center" style="display: none;" id="second-scene">
+        <h1 style="margin-top: 1em;"><span id="name">Player Name</span></h1>
         <span style="color: #312E33; ">has now their turn</span>
         
         <div class="grid-container">
-            <div class="grid-item"><span></span></div>
-            <div class="grid-item"><span></span></div>
-            <div class="grid-item"><span></span></div>
-            <div class="grid-item"><span></span></div>
-            <div class="grid-item"><span>X</span></div>
-            <div class="grid-item"><span></span></div>
-            <div class="grid-item"><span></span></div>
-            <div class="grid-item"><span></span></div>
-            <div class="grid-item"><span></span></div>
+            <div class="grid-item" id="0"><span></span></div>
+            <div class="grid-item" id="1"><span></span></div>
+            <div class="grid-item" id="2"><span></span></div>
+            <div class="grid-item" id="3"><span></span></div>
+            <div class="grid-item" id="4"><span></span></div>
+            <div class="grid-item" id="5"><span></span></div>
+            <div class="grid-item" id="6"><span></span></div>
+            <div class="grid-item" id="7"><span></span></div>
+            <div class="grid-item" id="8"><span></span></div>
         </div>
     </div>
 
 
-    <div class="center" >
+    <div class="center" id="first-scene">
       <div class="center start-menu">
         <div class="player-container">
           <input type="text" class="player-name" placeholder="Player 1">
@@ -48,7 +48,7 @@
     </div>
 
 
-    <div class="center" style="display: none; ">
+    <div class="center" style="display: none; " id="third-scene">
       <div class="center winner-screen start-menu">
         <h1>CONGRATULATIONS!</h1>
         <h2>Player Name</h2>
