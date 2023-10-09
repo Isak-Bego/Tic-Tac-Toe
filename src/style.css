@@ -96,7 +96,7 @@
 }
 
 .winner-screen{
-    background-color: purple;
+    background-color: var(--purple);
     color: white;
 }
 

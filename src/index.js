@@ -5,6 +5,9 @@ let scenes = [scene1, scene2, scene3];
 let gridItems = document.getElementsByClassName("grid-item");
 let playerNames = document.getElementsByClassName("player-name");
 let signs = document.getElementsByClassName("signs");
+let winnerName; 
+let ActivePlayer;
+let ctr  = 0; 
 
 let cells = [
   [0, 0, 0],
@@ -25,7 +28,7 @@ const displayController = (function () {
           "none",
           "flex",
         ]);
-        scenes[i + 1].style.display = toggle(scenes[i].style.display, [
+        scenes[(i + 1)%3].style.display = toggle(scenes[i].style.display, [
           "none",
           "flex",
         ]);
@@ -33,6 +36,18 @@ const displayController = (function () {
       }
     }
   };
+
+  const resetGame = () => {
+    for(let i = 0; i < 3; i++)
+      for(let j = 0; j < 3; j++)
+        cells[i][j] = 0; 
+
+    for(let i = 0; i < gridItems.length; i++) gridItems[i].innerHTML = "<span>" + "" + "</span>"; 
+    ctr = 0; 
+    document.getElementById('end-message').innerText = "CONGRATULATIONS!"; 
+    document.getElementsByClassName('winner-screen')[0].style.backgroundColor = "#2A0C42";   
+    changeScene(scenes); 
+  }
 
   const placeSign = (sign, cell) => {
     cell.innerHTML = "<span>" + sign + "</span>";
@@ -47,6 +62,7 @@ const displayController = (function () {
     changeScene,
     placeSign,
     toggleName,
+    resetGame
   };
 })();
 
@@ -55,14 +71,27 @@ const Player = (n, s) => {
   let sign = s;
 
   const markCell = (i) => {
+    ctr++; 
     displayController.placeSign(sign, gridItems[i]);
     let j = Math.floor(i/3); 
     if(sign == 'O') cells[j][i%3] = 1; 
-    else cells[j][i%3] = 2; 
-    gameLogic.checkForWinner(); 
-    gameLogic.changeActivePlayer();
-    displayController.toggleName();
-    console.log(cells); 
+    else cells[j][i%3] = 2;    
+    if(gameLogic.checkForWinner() == true){
+        displayController.changeScene(scenes); 
+        document.getElementById('winner-player').innerText = winnerName;  
+    }else{
+        if(ctr == 9){
+          document.getElementById('end-message').innerText = "DRAW"; 
+          document.getElementById('winner-player').innerText = "";
+          document.getElementsByClassName('winner-screen')[0].style.backgroundColor = "orange";   
+          displayController.changeScene(scenes); 
+        }
+        else{
+          gameLogic.changeActivePlayer();
+          displayController.toggleName();
+          console.log(cells); 
+        }
+    }
   };
 
   const setName = (n) => {
@@ -99,7 +128,7 @@ document
     displayController.toggleName();
   });
 
-let ActivePlayer;
+
 const Player1 = Player("", "");
 const Player2 = Player("", "");
 
@@ -109,7 +138,39 @@ const gameLogic = (function () {
   };
 
   const checkForWinner = () => {
-    
+        if((cells[0][0] == 1 && cells[0][1] == 1 && cells[0][2] == 1) || (cells[0][0] == 2 && cells[0][1] == 2 && cells[0][2] == 2) ){
+            winnerName = ActivePlayer.getName(); 
+            return true; 
+        }
+        else if((cells[1][0] == 1 && cells[1][1] == 1 && cells[1][2] == 1) || (cells[1][0] == 2 && cells[1][1] == 2 && cells[1][2] == 2)){
+            winnerName = ActivePlayer.getName(); 
+            return true; 
+        }
+        else if((cells[2][0] == 1 && cells[2][1] == 1 && cells[2][2] == 1 )|| (cells[2][0] == 2 && cells[2][1] == 2 && cells[2][2] == 2)){
+            winnerName = ActivePlayer.getName(); 
+            return true; 
+        }
+        else if((cells[0][0] == 1 && cells[1][0] == 1 && cells[2][0] == 1 )|| (cells[0][0] == 2 && cells[1][0] == 2 && cells[2][0] == 2)){
+            winnerName = ActivePlayer.getName(); 
+            return true; 
+        }
+        else if((cells[0][1] == 1 && cells[1][1] == 1 && cells[2][1] == 1 )|| (cells[0][1] == 2 && cells[1][1] == 2 && cells[2][1] == 2)){
+            winnerName = ActivePlayer.getName(); 
+            return true; 
+        }
+        else if((cells[0][2] == 1 && cells[1][2] == 1 && cells[2][2] == 1 )|| (cells[0][2] == 2 && cells[1][2] == 2 && cells[2][2] == 2)){
+            winnerName = ActivePlayer.getName(); 
+            return true; 
+        }
+        else if((cells[0][0] == 1 && cells[1][1] == 1 && cells[2][2] == 1) || (cells[0][0] == 2 && cells[1][1] == 2 && cells[2][2] == 2)){
+            winnerName = ActivePlayer.getName(); 
+            return true; 
+        }
+        else if((cells[0][2] == 1 && cells[1][1] == 1 && cells[2][0] == 1) || (cells[0][2] == 2 && cells[1][1] == 2 && cells[2][0] == 2)){
+            winnerName = ActivePlayer.getName(); 
+            return true; 
+        }
+        return false; 
   }
 
   return {
@@ -136,8 +197,17 @@ let [signButton1, signButton2] = [
 signButton1.addEventListener("click", changeSign);
 signButton2.addEventListener("click", changeSign);
 
+
+document.getElementById("replay").addEventListener('click', function(){
+  displayController.resetGame(); 
+})
+
 for (let i = 0; i < gridItems.length; i++) {
   gridItems[i].addEventListener("click", function () {
-    ActivePlayer.markCell(i);
+    let j = Math.floor(i/3); 
+    if(cells[j][i%3] == 0) ActivePlayer.markCell(i);
+    else{
+      alert("Please choose a free square"); 
+    }
   });
 }
