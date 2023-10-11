@@ -120,8 +120,8 @@ document
   .getElementsByClassName("button-start")[0]
   .addEventListener("click", function () {
     displayController.changeScene(scenes);
-    Player1.setName(playerNames[0].value);
-    Player2.setName(playerNames[1].value);
+    Player1.setName((playerNames[0].value == "") ? "Player1" : playerNames[0].value);
+    Player2.setName((playerNames[1].value == "") ? "Player2" : playerNames[1].value);
     Player1.setSign(signs[0].innerHTML);
     Player2.setSign(signs[1].innerHTML);
     ActivePlayer = Player1;
