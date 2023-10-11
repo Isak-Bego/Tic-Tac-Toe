@@ -107,3 +107,11 @@
     height: 3em; 
     margin: 2em; 
 }
+
+
+#replay img{
+    width: 30px; 
+    margin: auto; 
+    margin-top: 14%; 
+    cursor: pointer; 
+}
